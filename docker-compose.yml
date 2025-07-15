@@ -1,20 +1,24 @@
 services:
   flask:
     container_name: flask
-    image: monalika3131/todo-flask  
+    build:
+      context: .
+      dockerfile: Dockerfile.flask
     ports:
-      - "5000:5000"
+      - 5000:5000
     depends_on:
       - db
 
   db:
     container_name: db
-    image: monalika3131/todo-db
+    build:
+      context: .
+      dockerfile: Dockerfile.db
     environment:
       - MYSQL_ROOT_PASSWORD=password
     volumes:
       - db_data:/var/lib/mysql
 
 volumes:
-  db_data:
+  db_data: 
 
